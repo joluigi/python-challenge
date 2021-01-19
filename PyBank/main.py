@@ -9,7 +9,7 @@ profit_count = [] # A list with just profits
 loss_count = [] # A list with just losses
 ProLo_count = [] # A list including profits and losses
 ch_rate_list = [] # A list of the changes 
-#i = 0
+
 
 with open(bank_data) as csvfile:
     csvread = csv.reader(csvfile, delimiter=',')
@@ -38,13 +38,26 @@ with open(bank_data) as csvfile:
     max_chng = ch_rate_list.index(max(ch_rate_list))
     min_chng = ch_rate_list.index(min(ch_rate_list))  
 
-    print(f'Financial analysis')
-    print('----------------------')
-    print(f'Total months: {len(no_months)}')
-    print(f'Total Profit/Loss: {"${:,.0f}".format(sum(ProLo_count))}')
-    print(f'Average Change: {"${:,.2f}".format(round(stcs.mean(ch_rate_list),2))}')
-    print(f'The greatest increse in profit was: {no_months[max_chng+1]} with {"${:,.0f}".format(max(ch_rate_list))}')
-    print(f'The greatest decrease in profit was: {no_months[min_chng+1]} with {"${:,.0f}".format(min(ch_rate_list))}')
+# Creating the text file. If it already exist it will override the data
+results_txt = open('bank_summary.txt','w')
+results_txt.write('Financial analysis\n')
+results_txt.write('---------------------------\n')
+results_txt.write('Total months: ' + str(len(no_months))+'\n')
+results_txt.write('Total Profit/Loss: '+ str("${:,.0f}".format(sum(ProLo_count)))+'\n')
+results_txt.write('Average Change: ' + str("${:,.2f}".format(round(stcs.mean(ch_rate_list),2)))+'\n')
+results_txt.write('The greatest increse in profit was: '+ str(no_months[max_chng+1]) +' (' + str("${:,.0f}".format(max(ch_rate_list)))+')\n')
+results_txt.write('The greatest increse in profit was: '+ str(no_months[min_chng+1]) +' (' + str("${:,.0f}".format(min(ch_rate_list)))+')\n')
+results_txt.close()
+
+
+# Printing results to get a quick overview of the outcome
+print(f'Financial analysis')
+print('----------------------')
+print(f'Total months: {len(no_months)}')
+print(f'Total Profit/Loss: {"${:,.0f}".format(sum(ProLo_count))}')
+print(f'Average Change: {"${:,.2f}".format(round(stcs.mean(ch_rate_list),2))}')
+print(f'The greatest increse in profit was: {no_months[max_chng+1]} with {"${:,.0f}".format(max(ch_rate_list))}')
+print(f'The greatest decrease in profit was: {no_months[min_chng+1]} with {"${:,.0f}".format(min(ch_rate_list))}')
 
     
 
