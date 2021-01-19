@@ -23,11 +23,11 @@ results_txt = open('elections_result.txt','w')
 # Writing into the text file
 results_txt.write('E l e c t i o n   R e s u l t s\n')
 results_txt.write('------------------------------------\n')
-results_txt.write('Total votes: '+ str(len(vote_count))+ '\n')
+results_txt.write('Total votes: '+ str("{:,.0f}".format(len(vote_count)))+ '\n')
 results_txt.write('------------------------------------\n')
 for key in votes_p_cand:
     percentage = round((votes_p_cand[key]/len(vote_count))*100,2)
-    results_txt.write(str(key) + ': ' + str(percentage)+'% (' + str(int('{:,.0f}'.format(votes_p_cand[key]))) +')\n' )
+    results_txt.write(str(key) + ': ' + str(percentage)+'% (' + str('{:,.0f}'.format(votes_p_cand[key])) +')\n' )
 results_txt.write('------------------------------------\n')
 results_txt.write('Winner: ' + max(votes_p_cand,key=votes_p_cand.get))
 results_txt.close()
